@@ -1,7 +1,7 @@
 # XASUAI — Sistem Navigasi Lokasi Pendaratan di Bulan
 > **NASA Space Apps Challenge 2026 | Challenge: Lunar Landing Site Navigator**  
 > **Tim: Pilar Karya | Lokasi Target: Mons Mouton Crest, Kutub Selatan Bulan (-84,9°S, 33,3°W)**  
-> **Repositori Resmi:** [https://github.com/accfd/XSasuai](https://github.com/accfd/XSasuai)  
+> **Repositori Resmi:** [https://github.com/accfd/Xasuai](https://github.com/accfd/Xasuai)  
 > **Dukungan Bahasa:** Bilingual Penuh (Bahasa Indonesia & English)
 
 ---
@@ -25,8 +25,8 @@ Juri dan penguji dapat menjalankan aplikasi secara lokal dengan 3 langkah mudah 
 
 ### Langkah 1: Clone Repositori
 ```bash
-git clone https://github.com/accfd/XSasuai.git
-cd XSasuai
+git clone https://github.com/accfd/Xasuai.git
+cd Xasuai
 ```
 
 ### Langkah 2: Pasang Pustaka Dependensi (Python 3.10+)
@@ -129,7 +129,7 @@ Selain antarmuka web, launcher `main.py` menyediakan opsi multi-mode:
 ## 📁 6. Struktur Direktori Proyek
 
 ```text
-XSasuai/
+Xasuai/
 ├── data/
 │   ├── quickmap-lroc.png          # Citra Satelit Elevasi NASA LRO LOLA DEM
 │   ├── quickmap-lroc.vrt          # Metadata Geospasial Proyeksi Polar
