@@ -148,33 +148,38 @@ Selain antarmuka web, launcher `main.py` menyediakan opsi multi-mode:
 
 ```text
 Xasuai/
-├── data/
-│   ├── quickmap-lroc.png          # Citra Satelit Elevasi NASA LRO LOLA DEM
-│   ├── quickmap-lroc.vrt          # Metadata Geospasial Proyeksi Polar
-│   └── horizons_cache.json        # Cache Efemeris NASA JPL Horizons DE441
-├── output/
-│   └── mission_state.json         # Bus Status Sinkronisasi Antar-Modul
-├── src/
-│   ├── site_evaluator.py          # Modul Analisis Slope, Raymarching 360°, & MCDA
-│   ├── trajectory_calculator.py   # Modul Solver PDI RK45 & Perturbasi Gravitasi J2
-│   └── visualizer_ui.py           # Modul Visualisasi Polar Sky-Plot
-├── web/
-│   ├── index.html                 # Dashboard Web Executive (Bento Grid)
-│   ├── simulator.html             # Simulator Pendaratan Misi 3D (WebGL / Three.js)
-│   ├── server.py                  # Backend REST API Server (Tornado Engine)
-│   ├── js/
-│   │   └── app.js                 # Engine Logika, Three.js 3D, & Sistem Bilingual i18n
-│   └── css/
-│       └── style.css              # Tata Letak Modern NASA / Linear Clean Design
-├── tests/
-│   ├── test_xsasuai_core.py       # Pengujian Unit Modul Inti
-│   └── test_web_server.py         # Pengujian Integrasi REST API
-├── constants.py                   # Konstanta Fisika, Astronomi, & Koordinat Acuan
-├── mission_state.py               # Shared State Manager
-├── horizons_api.py                # Klien REST API NASA JPL Horizons
-├── main.py                        # Launcher Terpadu
-├── requirements.txt               # Daftar Pustaka Dependensi Python
-└── README.md                      # Dokumentasi Resmi Proyek
+├── web/                               # Antarmuka Web Executive & Simulator 3D
+│   ├── index.html                     # Dashboard Web Executive (Bento Grid)
+│   ├── simulator.html                 # Simulator Pendaratan Misi 3D (WebGL / Three.js)
+│   ├── server.py                      # Backend REST API Server (Tornado Engine)
+│   ├── js/app.js                      # Engine Logika, Three.js 3D, & Sistem Bilingual i18n
+│   ├── css/style.css                  # Tata Letak Modern NASA / Linear Clean Design
+│   └── data/                          # Data Mesh 3D Topografi Mons Mouton & Tekstur
+├── src/                               # Modul Layanan Backend
+│   ├── site_evaluator.py              # Evaluasi Spasiotemporal & Scoring MCDA
+│   ├── trajectory_calculator.py       # Propagator Trajektori PDI & Solver RK45
+│   └── visualizer_ui.py               # Generator Polar Sky-Plot & Visualizer
+├── data/                              # Dataset Ilmiah NASA
+│   ├── quickmap-lroc.png / .vrt       # Citra Satelit Elevasi NASA LRO LOLA DEM
+│   ├── horizons_cache.json            # Cache Efemeris NASA JPL Horizons DE441
+│   ├── moon_1024.jpg                  # Tekstur Fotorealistik Permukaan Bulan
+│   └── earth_blue_marble.jpg          # Tekstur Bumi Resolusi Tinggi
+├── tests/                             # Pengujian Otomatis (Automated Unit Tests)
+│   ├── test_xsasuai_core.py           # Pengujian Unit Modul Inti (MCDA, RK45, Skyplot)
+│   └── test_web_server.py             # Pengujian Integrasi REST API
+├── utilities/ & scripts/              # Data Pipeline & Preprocessing
+│   ├── generate_jpl_horizons_ephemeris.py # Pipeline Pengunduh Efemeris NASA JPL
+│   ├── parse_horizons_to_trajectory_js.py # Konverter Trajektori ke Format WebGL
+│   └── export_terrain_to_web.py       # Eksportir Data LOLA DEM ke Web 3D
+├── solar_earth_horizon_planner.py     # [Solusi 1] Solver Sudut Surya & Raymarching Cakrawala
+├── scan_terrain.py                    # [Solusi 2] Solver Analisis Kelerengan & Optimasi MCDA
+├── simulate_landing.py                # [Solusi 3] Solver Dinamika Pendaratan 6-DOF & Gravitasi J2
+├── horizons_api.py                    # Klien Resmi REST API NASA JPL Horizons
+├── mission_state.py                   # Shared State Bus Antar-Modul
+├── constants.py                       # Konstanta Fisika, Astronomi, & Koordinat Acuan
+├── main.py                            # Launcher Terpadu (Default: Web Console)
+├── requirements.txt                   # Daftar Pustaka Dependensi Python Ringkas
+└── README.md                          # Dokumentasi Resmi Proyek
 ```
 
 ---
