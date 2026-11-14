@@ -184,7 +184,46 @@ Xasuai/
 
 ---
 
-## 👥 7. Tim Pengembang & Atribusi
+## 🌐 7. Sumber Data Resmi & Referensi Ilmiah (Data Sources & Links)
+
+Proyek XASUAI dibangun menggunakan data terbuka (*Open Data*) resmi dari NASA dan badan antariksa internasional:
+
+1. **NASA LRO LOLA DEM (Lunar Reconnaissance Orbiter / Lunar Orbiter Laser Altimeter)**  
+   - **Deskripsi:** Model Elevasi Digital (DEM) satelit beresolusi tinggi (20 m/pixel) untuk memetakan topografi mikro, kontur kelerengan (*slope safety*), dan elevasi tebing kawah di Mons Mouton.  
+   - **Tautan Data:** [NASA LROC QuickMap](https://quickmap.lroc.asu.edu/) • [NASA PDS Geosciences Node (LOLA RDR)](https://pds-geosciences.wustl.edu/missions/lro/lola.htm)
+
+2. **NASA JPL Horizons Ephemeris System (DE441 / DE440)**  
+   - **Deskripsi:** Sistem efemeris presisi tinggi dari NASA Jet Propulsion Laboratory untuk melacak vektor posisi Matahari (Target: `10`) dan Bumi (Target: `399`) terhadap titik koordinat pendarat di Bulan selama rentang misi 336 jam (14 hari lunar).  
+   - **Tautan API:** [NASA JPL Horizons System](https://ssd.jpl.nasa.gov/horizons/) • [NASA JPL Horizons REST API Documentation](https://ssd-api.jpl.nasa.gov/doc/horizons.html)
+
+3. **NASA Moon Trek (Solar System Treks)**  
+   - **Deskripsi:** Portal eksplorasi kartografi interaktif permukaan Bulan untuk verifikasi silang koordinat geospasial Mons Mouton Crest ($-84,9^\circ\text{S}, 33,3^\circ\text{W}$).  
+   - **Tautan Aplikasi:** [NASA Moon Trek Explorer](https://trek.nasa.gov/moon/)
+
+4. **NASA Artemis III Candidate Landing Regions Study**  
+   - **Deskripsi:** Publikasi ilmiah resmi NASA yang menetapkan dataran tinggi Mons Mouton sebagai salah satu dari 13 zona kandidat pendaratan berawak Artemis karena keunggulan elevasi dan akses pencahayaannya.  
+   - **Tautan Publikasi:** [NASA Artemis Landing Regions Announcement](https://www.nasa.gov/news-release/nasa-identifies-candidate-regions-for-additional-artemis-lunar-landings/)
+
+5. **NASA NAIF SPICE Toolkit**  
+   - **Deskripsi:** Standar pustaka astrodinamika untuk transformasi koordinat inersial (J2000) ke kerangka referensi tetap Bulan (MOON_ME / IAU Moon Frame).  
+   - **Tautan Toolkit:** [NAIF NASA SPICE Information System](https://naif.jpl.nasa.gov/naif/toolkit.html)
+
+---
+
+## 🤖 8. Pernyataan Transparansi Penggunaan AI (AI Disclosure Statement)
+
+Sesuai dengan ketentuan etika dan transparansi kompetisi **NASA Space Apps Challenge**:
+
+> ### 📌 Pernyataan Tim (Team Statement):
+> **Alat bantu kecerdasan buatan (AI) digunakan semata-mata sebagai akselerator teknis coding (*development accelerator*) untuk mempercepat penulisan sintaksis pemrograman, perapian modul (*code refactoring*), serta penyusunan sistem kamus dwibahasa (ID ⟷ EN).**
+>
+> **AI TIDAK DIGUNAKAN UNTUK MEMBUAT IDE ATAU MERANCANG SOLUSI PROYEK.**
+>
+> Seluruh ide konseptual, penetapan lokasi Mons Mouton di Kutub Selatan Bulan, perumusan 3 masalah kritis (suhu/cahaya, tebing komunikasi, dan dinamika pendaratan), formulasi 3 solusi terintegrasi, metodologi matematika *Multi-Criteria Decision Analysis (MCDA)*, *Raymarching Horizon 360°*, serta penerapan solver numerik *Runge-Kutta RK45* **murni digagas, dirumuskan, dan dirancang secara orisinal oleh tim pengembang (Pilar Karya)**.
+
+---
+
+## 👥 9. Tim Pengembang & Atribusi
 
 - **Tim:** Pilar Karya
 - **Ajang:** NASA Space Apps Challenge 2026
