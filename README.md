@@ -21,7 +21,7 @@ Kutub Selatan Bulan memiliki tantangan ekstrem: sudut datang sinar Matahari sang
 
 ## ⚡ 2. Panduan Cepat Menjalankan Aplikasi (1 Menit untuk Juri)
 
-Juri dan penguji dapat menjalankan aplikasi secara lokal dengan 3 langkah mudah berikut:
+Juri dan penguji dapat menjalankan aplikasi secara lokal dengan langkah mudah berikut:
 
 ### Langkah 1: Clone Repositori
 ```bash
@@ -29,14 +29,32 @@ git clone https://github.com/accfd/Xasuai.git
 cd Xasuai
 ```
 
-### Langkah 2: Pasang Pustaka Dependensi (Python 3.10+)
+### Langkah 2: Buat & Aktifkan Virtual Environment (`venv`)
+*Direkomendasikan agar paket dependensi terisolasi bersih dan tidak berbenturan dengan sistem:*
+```bash
+# Membuat virtual environment
+python -m venv venv
+
+# Mengaktifkan venv:
+# • Di Windows (Command Prompt / PowerShell):
+venv\Scripts\activate
+
+# • Di macOS / Linux:
+source venv/bin/activate
+```
+
+### Langkah 3: Pasang Pustaka Dependensi (Python 3.10+)
 ```bash
 pip install -r requirements.txt
 ```
 
-### Langkah 3: Luncurkan Web Dashboard
+### Langkah 4: Luncurkan Web Dashboard & Server
 ```bash
-python main.py --web
+# Perintah utama (otomatis membuka peramban browser):
+python main.py
+
+# ATAU langsung menjalankan server backend web:
+python web/server.py
 ```
 
 Aplikasi web server lokal Tornado akan aktif dan browser otomatis membuka alamat:  
@@ -118,7 +136,7 @@ Selain antarmuka web, launcher `main.py` menyediakan opsi multi-mode:
 
 | Perintah Terminal | Mode Aplikasi | Keterangan |
 | :--- | :--- | :--- |
-| **`python main.py --web`** | **Web Console (Rekomendasi Utama)** | Menjalankan server Tornado & membuka Web Bento Dashboard (`:8888`). |
+| **`python main.py`** (atau `python web/server.py`) | **Web Console (Rekomendasi Utama)** | Menjalankan server Tornado & otomatis membuka Web Dashboard di browser (`:8888`). |
 | **`python main.py --desktop`** | **Desktop GUI PyQt6** | Menjalankan antarmuka desktop native 5-tab. |
 | **`python main.py --sim`** | **Flight Testbed Cockpit** | Menjalankan simulator penerbangan mandiri berbasis Pygame/PyOpenGL. |
 | **`python main.py --eval`** | **CLI Batch Evaluator** | Menjalankan kalkulasi cepat MCDA langsung di terminal teks. |

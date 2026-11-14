@@ -499,15 +499,19 @@ def main():
     import webbrowser
 
     parser = argparse.ArgumentParser(description="XSasuai — Lunar Landing Site Navigator (NASA Space Apps Challenge 2026)")
-    parser.add_argument("--web", action="store_true", help="Jalankan antarmuka interaktif Web Dashboard (Tornado)")
-    parser.add_argument("--desktop", action="store_true", help="Jalankan antarmuka Desktop GUI (PyQt6) [Default]")
+    parser.add_argument("--web", action="store_true", help="Jalankan antarmuka interaktif Web Dashboard (Tornado) [Default]")
+    parser.add_argument("--desktop", action="store_true", help="Jalankan antarmuka Desktop GUI (PyQt6)")
     parser.add_argument("--sim", action="store_true", help="Jalankan 3D Cockpit Flight Simulator Testbed")
     parser.add_argument("--eval", action="store_true", help="Jalankan evaluasi CLI untuk ketiga kandidat situs")
     parser.add_argument("--port", type=int, default=8888, help="Port untuk Web Dashboard (default: 8888)")
 
     args, unknown = parser.parse_known_args()
 
-    # 1. Mode Web Dashboard
+    # Default ke mode Web Dashboard jika tidak ada opsi spesifik yang dipilih
+    if not (args.desktop or args.sim or args.eval):
+        args.web = True
+
+    # 1. Mode Web Dashboard (Default)
     if args.web:
         from web.server import run_server
         url = f"http://127.0.0.1:{args.port}"
