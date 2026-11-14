@@ -201,23 +201,6 @@ class TrajectoryHandler(BaseApiHandler):
             self.write_json({"error": str(e)}, 500)
 
 
-class LaunchSimHandler(BaseApiHandler):
-    """POST /api/launch_sim — Meluncurkan Pygame Flight Simulator 3D di window terpisah."""
-    def post(self):
-        try:
-            python_exe = sys.executable
-            sim_script = os.path.join(BASE_DIR, "lunar_game_simulator.py")
-            if not os.path.isfile(sim_script):
-                sim_script = os.path.join(BASE_DIR, "simulator", "lunar_game_simulator.py")
-
-            # Spawn subprocess di background tanpa block server
-            subprocess.Popen([python_exe, sim_script], cwd=BASE_DIR)
-            self.write_json({"status": "SUCCESS", "message": "Lunar Game Simulator 3D berhasil diluncurkan!"})
-        except Exception as e:
-            logger.error(f"Gagal meluncurkan simulator: {e}")
-            self.write_json({"status": "ERROR", "message": str(e)}, 500)
-
-
 class MainIndexHandler(tornado.web.RequestHandler):
     """Menyajikan halaman antarmuka utama dengan penonaktifan cache."""
     def get(self, *args):
@@ -259,7 +242,6 @@ def make_app():
         (r"/api/evaluate", EvaluateHandler),
         (r"/api/timeline", TimelineHandler),
         (r"/api/trajectory", TrajectoryHandler),
-        (r"/api/launch_sim", LaunchSimHandler),
         (r"/web_data/(.*)", NoCacheStaticFileHandler, {"path": os.path.join(web_dir, "data")}),
         (r"/data/(.*)", CacheStaticFileHandler, {"path": data_dir}),
         (r"/(.*)", NoCacheStaticFileHandler, {"path": web_dir, "default_filename": "index.html"}),

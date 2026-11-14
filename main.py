@@ -404,7 +404,7 @@ class MissionControlApp(QMainWindow):
         self.lbl_sim_context.setStyleSheet("color: white; font-size: 11px; margin-top: 10px;")
         b_lay.addWidget(self.lbl_sim_context)
 
-        btn_launch = QPushButton("🚀 LUNCURKAN SIMULATOR 3D PINPOINT FLIGHT (PYGAME)")
+        btn_launch = QPushButton("🚀 BUKA SIMULATOR 3D PINPOINT FLIGHT (WEBGL BROWSER)")
         btn_launch.setCursor(Qt.CursorShape.PointingHandCursor)
         btn_launch.setStyleSheet("background-color: #10b981; color: #04060a; font-weight: bold; font-size: 13px; padding: 12px 24px; border-radius: 4px; margin-top: 15px;")
         btn_launch.clicked.connect(self.launch_3d_simulator)
@@ -415,9 +415,10 @@ class MissionControlApp(QMainWindow):
 
     def launch_3d_simulator(self):
         try:
-            subprocess.Popen([sys.executable, "lunar_game_simulator.py"])
+            import webbrowser
+            webbrowser.open("http://127.0.0.1:8888/simulator.html")
         except Exception as e:
-            QMessageBox.warning(self, "Error", f"Gagal meluncurkan simulator 3D: {e}")
+            QMessageBox.warning(self, "Error", f"Gagal membuka simulator 3D: {e}")
 
     # =================================================================
     # LOGIKA SINKRONISASI & EVENT
@@ -523,11 +524,17 @@ def main():
         run_server(args.port)
         return
 
-    # 2. Mode Simulator Pygame
+    # 2. Mode Simulator WebGL 3D
     if args.sim:
-        from lunar_game_simulator import main as sim_main
-        print("🎮 Memulai Lunar Flight Testbed 3D Simulator...")
-        sim_main()
+        import webbrowser
+        url = f"http://127.0.0.1:{args.port}/simulator.html"
+        print(f"🚀 Membuka 3D Lunar Landing Simulator di browser: {url}")
+        try:
+            webbrowser.open(url)
+        except Exception:
+            pass
+        from web.server import run_server
+        run_server(args.port)
         return
 
     # 3. Mode Evaluasi CLI

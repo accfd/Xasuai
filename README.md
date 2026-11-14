@@ -138,7 +138,7 @@ Selain antarmuka web, launcher `main.py` menyediakan opsi multi-mode:
 | :--- | :--- | :--- |
 | **`python main.py`** (atau `python web/server.py`) | **Web Console (Rekomendasi Utama)** | Menjalankan server Tornado & otomatis membuka Web Dashboard di browser (`:8888`). |
 | **`python main.py --desktop`** | **Desktop GUI PyQt6** | Menjalankan antarmuka desktop native 5-tab. |
-| **`python main.py --sim`** | **Flight Testbed Cockpit** | Menjalankan simulator penerbangan mandiri berbasis Pygame/PyOpenGL. |
+| **`python main.py --sim`** | **Flight Simulator 3D** | Langsung meluncurkan WebGL 3D Flight Simulator di peramban browser. |
 | **`python main.py --eval`** | **CLI Batch Evaluator** | Menjalankan kalkulasi cepat MCDA langsung di terminal teks. |
 | **`python main.py --help`** | **Menu Bantuan** | Menampilkan daftar seluruh parameter dan argumen yang tersedia. |
 
@@ -166,8 +166,6 @@ Xasuai/
 │   │   └── app.js                 # Engine Logika, Three.js 3D, & Sistem Bilingual i18n
 │   └── css/
 │       └── style.css              # Tata Letak Modern NASA / Linear Clean Design
-├── simulator/
-│   └── lunar_game_simulator.py    # Simulator Uji Terbang 3D Standalone
 ├── tests/
 │   ├── test_xsasuai_core.py       # Pengujian Unit Modul Inti
 │   └── test_web_server.py         # Pengujian Integrasi REST API
