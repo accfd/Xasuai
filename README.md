@@ -1,232 +1,441 @@
-# XASUAI — Sistem Navigasi Lokasi Pendaratan di Bulan
-> **NASA Space Apps Challenge 2026 | Challenge: Lunar Landing Site Navigator**  
-> **Tim: Pilar Karya | Lokasi Target: Mons Mouton Crest, Kutub Selatan Bulan (-84,9°S, 33,3°W)**  
-> **Repositori Resmi:** [https://github.com/accfd/Xasuai](https://github.com/accfd/Xasuai)  
-> **Dukungan Bahasa:** Bilingual Penuh (Bahasa Indonesia & English)
+# XASUAI — Executive Lunar Landing Site Navigator
+
+> **NASA Space Apps Challenge 2026**
+>
+> **Challenge:** Lunar Landing Site Navigator  
+> **Team:** PILAR KARYA  
+> **Project Tagline:** *3 Steps to Easier Lunar Landing*  
+> **Target Location:** Mons Mouton Crest, Lunar South Pole (-84.9°S, 33.3°W)  
+> **Repository:** https://github.com/accfd/Xasuai  
+> **Languages:** English and Bahasa Indonesia
+
+*A formula-based lunar mission planning platform that identifies safer landing opportunities through environmental analysis, terrain assessment, and flight trajectory simulation.*
 
 ---
 
-## 🌒 1. Ringkasan Eksekutif (Executive Summary)
+## 1. Project Overview
 
-**XASUAI (Executive Lunar Landing Site Navigator)** adalah sistem navigasi cerdas berbasis web dan astrodinamika untuk menentukan lokasi serta waktu pendaratan teraman bagi wahana misi Artemis di **Mons Mouton**, Kutub Selatan Bulan.
+### The Challenge
 
-Kutub Selatan Bulan memiliki tantangan ekstrem: sudut datang sinar Matahari sangat rendah, bayangan kawah tebal menimbulkan suhu hingga **-240°C**, serta perbukitan tinggi yang berisiko memutus jalur komunikasi radio langsung ke Bumi (*Direct-to-Earth / DTE*).
+Landing a spacecraft near the Moon's South Pole presents several environmental and technical challenges. Low solar elevation angles create extended shadows and extreme temperature variations, while crater rims and elevated terrain can obstruct direct radio communication between a landing site and Earth.
 
-**XASUAI memecahkan tantangan tersebut melalui 3 Solusi Terintegrasi:**
-1. **Solusi 1 — Rekomendasi Waktu Peluncuran & Pendaratan (*MCDA Engine*):** Memindai 336 jam data efemeris **NASA JPL Horizons DE441** untuk mengidentifikasi *Golden Solar Window* dengan pencahayaan surya kontinu 100% dan komunikasi stabil.
-2. **Solusi 2 — Visualisasi Medan & Analisis Topografi (*Terrain Inspector*):** Memetakan ketinggian dan kemiringan lereng menggunakan citra satelit **NASA LRO LOLA DEM** ($0,08^\circ$, aman di bawah batas NASA $10^\circ$) serta memvalidasi garis pandang bebas tebing kawah ($+12,35^\circ$).
-3. **Solusi 3 — Simulasi Misi Penuh & Dinamika Pendaratan 6-DOF (*Flight Simulator*):** Menyimulasikan lintasan dari Bumi (KSC LC-39B), Injeksi Translunar (+3,05 km/s), hingga inisiasi pengereman bertenaga (*PDI*) SpaceX Starship HLS menyentuh Mons Mouton Crest secara real-time pada 60 FPS.
+These conditions make landing-site selection, mission scheduling, and spacecraft navigation particularly challenging for future lunar exploration missions.
+
+### Our Solution
+
+**XASUAI (Executive Lunar Landing Site Navigator)** is a web-based lunar mission planning platform designed to support safer landing decisions at Mons Mouton Crest, one of the candidate landing regions in the lunar South Pole.
+
+The platform integrates scientific datasets, mathematical calculations, and interactive visualizations into three interconnected solutions:
+
+**Solution 1 — Landing Window Recommendation**
+
+Identifies suitable launch and landing opportunities by analyzing solar illumination, Earth visibility, and environmental conditions using NASA JPL Horizons ephemeris data and a Multi-Criteria Decision Analysis (MCDA) approach.
+
+**Solution 2 — Terrain Visualization and Topographic Analysis**
+
+Evaluates surface elevation, slope conditions, and communication line-of-sight using NASA Lunar Reconnaissance Orbiter (LRO) Lunar Orbiter Laser Altimeter (LOLA) Digital Elevation Model (DEM) data.
+
+**Solution 3 — Full Mission Simulation and Landing Dynamics**
+
+Simulates the spacecraft journey from Earth departure to lunar touchdown, including translunar injection, orbital descent, and powered landing maneuvers using numerical trajectory calculations.
+
+Together, these three solutions provide an integrated approach to evaluating landing conditions and understanding the challenges of lunar mission planning.
 
 ---
 
-## ⚡ 2. Panduan Cepat Menjalankan Aplikasi (1 Menit untuk Juri)
+## 2. How to Run the Application
 
-Juri dan penguji dapat menjalankan aplikasi secara lokal dengan langkah mudah berikut:
+Follow these steps to install and run XASUAI locally.
 
-### Langkah 1: Clone Repositori
+### Prerequisites
+
+- Python 3.10 or later.
+- Git.
+- A modern web browser.
+- Internet connection for accessing external resources when required.
+
+### Step 1 — Clone the Repository
+
 ```bash
 git clone https://github.com/accfd/Xasuai.git
 cd Xasuai
 ```
 
-### Langkah 2: Buat & Aktifkan Virtual Environment (`venv`)
-*Direkomendasikan agar paket dependensi terisolasi bersih dan tidak berbenturan dengan sistem:*
+### Step 2 — Create a Virtual Environment
+
 ```bash
-# Membuat virtual environment
 python -m venv venv
+```
 
-# Mengaktifkan venv:
-# • Di Windows (Command Prompt / PowerShell):
+Activate the environment:
+
+**Windows:**
+
+```bash
 venv\Scripts\activate
+```
 
-# • Di macOS / Linux:
+**macOS / Linux:**
+
+```bash
 source venv/bin/activate
 ```
 
-### Langkah 3: Pasang Pustaka Dependensi (Python 3.10+)
+### Step 3 — Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### Langkah 4: Luncurkan Web Dashboard & Server
-```bash
-# Perintah utama (otomatis membuka peramban browser):
-python main.py
+### Step 4 — Launch XASUAI
 
-# ATAU langsung menjalankan server backend web:
+Run the primary application launcher:
+
+```bash
+python main.py
+```
+
+Alternatively, start the web server directly:
+
+```bash
 python web/server.py
 ```
 
-Aplikasi web server lokal Tornado akan aktif dan browser otomatis membuka alamat:  
-👉 **`http://127.0.0.1:8888`**
+Once the server starts, access the application through:
 
-> **Tips Navigasi Cepat:**
-> - Di pojok kanan atas header navbar, terdapat tombol **`ID | EN`** untuk beralih bahasa seketika (Bahasa Indonesia ⟷ English).
-> - Seluruh halaman telah dioptimalkan agar responsif, bebas error konsol, dan beroperasi pada 60 FPS.
+**http://127.0.0.1:8888**
 
----
+### Language Settings
 
-## 🎯 3. Panduan Pemeriksaan Juri (Judging & Evaluation Walkthrough)
+XASUAI supports two languages:
 
-Untuk mempermudah dewan juri dalam menguji dan menilai seluruh fitur sistem, berikut alur evaluasi terpandu:
+- English (EN)
+- Bahasa Indonesia (ID)
 
-### 📍 Tahap 1: Halaman Beranda (Home Overview)
-- **Globe 3D Interaktif Bulan:** Tampilan fotorealistik permukaan Bulan menggunakan WebGL/Three.js. Juri dapat mengklik globe untuk beralih ke penjelasan masalah.
-- **Rangkuman Masalah & Solusi:** Presentasi terstruktur mengenai 3 tantangan utama pendaratan kutub dan 3 pilar solusi yang disediakan XASUAI.
-- **Pengubah Bahasa:** Uji tombol **EN** di header kanan atas untuk melihat seluruh teks, metrik, dan kartu beralih ke bahasa Inggris secara instan.
-
-### 📍 Tahap 2: Solusi 1 — Rekomendasi Waktu Pendaratan (`/rekomendasi`)
-1. Klik menu **Rekomendasi** di navbar atas.
-2. Pilih bulan dan tahun rencana misi (contoh: **November 2026**).
-3. Klik tombol biru **`HITUNG JADWAL REKOMENDASI`**.
-4. **Perhatikan Layar Scanner Telemetri:** Sistem melakukan analisis astrodinamika 4 tahap secara sekuensial (akses efemeris JPL Horizons, kalkulasi sudut elevasi, pemindaian rintangan tebing kawah, dan penguncian waktu touchdown).
-5. **Hasil Analisis Optimal:**
-   - **Lepas Landas dari Bumi:** 11 November 2026, 08:00 UTC (durasi perjalanan 4 hari).
-   - **Pendaratan di Bulan:** 15 November 2026, 08:00 UTC.
-   - **Status:** *Optimal & Aman* (100% sinar matahari kontinu & jalur sinyal langsung tanpa hambatan).
-6. **Modal Rekomendasi Tersimpan:** Klik tombol *"Lihat Hasil Rekomendasi Tersimpan ↓"* untuk melihat matriks perbandingan multi-lokasi (*Site Alpha*, *Site Beta*, *Site Gamma*) berdasarkan skor MCDA.
-
-### 📍 Tahap 3: Solusi 2 — Visualisasi Medan & Analisis Topografi (`/visualisasi`)
-Halaman ini menyajikan 3 mode inspeksi visual:
-1. **Mode 1 — Navigasi Orbital 3D:**
-   - Globe orbital 3D dari luar angkasa dengan HUD ketinggian kamera (*15,0 km | Target Terkunci*).
-   - Klik tombol **`🚀 Fly-To Mons Mouton`** untuk melihat animasi kamera menukik mulus menuju koordinat $(-84,9^\circ\text{S}, 33,3^\circ\text{W})$.
-2. **Mode 2 — Inspeksi Kelerengan & Kontur Medan 2D (LOLA DEM):**
-   - Menampilkan peta elevasi satelit NASA LOLA DEM.
-   - Juri dapat melakukan **Zoom** (roda mouse / tombol `＋` `－`) dan **Pan/Geser peta** (klik & tarik).
-   - Dilengkapi 4 ubin metrik keselamatan:
-     - *Kemiringan Lereng:* **0,08°** (Sangat datar, jauh di bawah standar aman NASA $10^\circ$).
-     - *Elevasi Puncak:* **+5.920 m** (Dataran tinggi, jauh di atas kawah gelap).
-     - *Iluminasi Surya:* **100% Bebas Bayangan** (Suplai daya surya penuh).
-     - *Status Topografi:* **VERIFIKASI GO (AMAN)**.
-3. **Mode 3 — Visualisasi 3D Topografi & Jalur Sinyal Radio (DTE):**
-   - Model 3D realistis elevasi permukaan dataran tinggi Mons Mouton.
-   - Juri dapat mengganti lapisan peta melalui dropdown: *Zona Kelayakan (MCDA Viridis)*, *Topografi Elevasi (LOLA DEM)*, atau *Kemiringan Lereng (Slope Safety)*.
-   - **Garis Sinyal Laser Cyan ke Bumi:** Membuktikan sudut bebas pandang antena sebesar **+12,35°** di atas bibir tebing tertinggi (*zero loss-of-signal*).
-
-### 📍 Tahap 4: Solusi 3 — Simulasi Misi Penuh & Dinamika Pendaratan (`/simulasi`)
-1. Klik menu **Simulasi** di navbar atas.
-2. Membaca rangkuman 3 fase penerbangan wahana (Fase 1: Peluncuran TLI, Fase 2: Penurunan Orbit Polar, Fase 3: PDI & Pendaratan HLS).
-3. Klik tombol biru **`🚀 LUNCURKAN SIMULATOR 3D MISI PENUH (TAB BARU) ↗`**.
-4. **Simulator 3D Terbuka di Tab Baru (`simulator.html`):**
-   - Simulasi grafis 3D real-time 60 FPS berbasis WebGL.
-   - Mengendalikan wahana SpaceX Starship HLS pada manuver *Powered Descent Initiation (PDI)*.
-   - Dilengkapi instrumen avionik penerbangan: kecepatan vertikal ($V_z$), kecepatan horizontal ($V_x$), sisa bahan bakar propelan, altimeter, dan indikator touchdown aman ($V_z \le 1,0\text{ m/s}$).
+Use the language selector in the upper-right corner of the navigation bar to switch between languages.
 
 ---
 
-## 🔬 4. Validasi Data Ilmiah & Formula Astrodinamika
+## 3. Application Features
 
-Seluruh angka dan kesimpulan yang disajikan sistem XASUAI dihitung berdasarkan dataset terverifikasi dan prinsip fisika antariksa:
+XASUAI consists of three main solutions accessible through its web interface.
 
-| Parameter Ilmiah | Sumber Data / Formula | Nilai Terhitung | Implikasi Keselamatan Misi |
-| :--- | :--- | :--- | :--- |
-| **Topografi & Elevasi** | NASA LRO LOLA DEM (Resolusi 20m/px) | Elevasi: **+5.920 m** | Berada di dataran tinggi, terbebas dari bayangan kawah dalam. |
-| **Kemiringan Lereng** | Gradien Vektor Normal LOLA DEM | **0,08°** | Memenuhi syarat NASA Artemis ($< 10^\circ$), risiko wahana terguling nihil. |
-| **Posisi Matahari & Bumi** | NASA JPL Horizons API (DE441 Ephemeris) | Azimuth & Elevasi 336 Jam | Menemukan jendela pencahayaan optimal 14 hari penuh. |
-| **Bebas Hambatan Sinyal** | Horizon Raymarching 360° | Margin: **+12,35°** | Jalur gelombang radio langsung ke Bumi (DTE) bebas hambatan tebing. |
-| **Injeksi Translunar (TLI)** | Mekanika Orbital Dua Benda | $\Delta v = +3,05\text{ km/s}$ | Melepaskan wahana dari LEO (185 km) menuju lintasan Bulan 384.400 km. |
-| **Descent Guidance (PDI)** | Runge-Kutta 4th/5th-Order (RK45) | $V_z = 0,80\text{ m/s}$ | Touchdown vertikal lembut sesuai spesifikasi kaki pendarat Starship HLS. |
+### 3.1 Solution 1 — Landing Window Recommendation
+
+**Route:** `/rekomendasi`
+
+This module evaluates potential launch and landing schedules by examining the relative positions of the Sun and Earth, solar elevation angles, and terrain obstruction conditions.
+
+**How to use:**
+
+1. Open the **Recommendation** menu.
+2. Select the intended mission month and year.
+3. Click **Calculate Recommended Schedule**.
+4. Observe the sequential telemetry analysis process.
+5. Review the recommended launch and landing schedule.
+6. Open the saved recommendation results to examine the MCDA comparison between alternative landing locations.
+
+**Key capabilities:**
+
+- Accesses NASA JPL Horizons ephemeris data.
+- Evaluates solar elevation and illumination conditions.
+- Analyzes potential crater-rim obstructions.
+- Identifies suitable mission timing.
+- Compares alternative landing locations using MCDA scoring.
+
+**Illustrative calculation result:**
+
+| Parameter | Result |
+|---|---|
+| Earth Departure | November 11, 2026, 08:00 UTC |
+| Lunar Landing | November 15, 2026, 08:00 UTC |
+| Estimated Travel Duration | 4 days |
+| Solar Illumination | 100% continuous illumination |
+| Communication | Direct line-of-sight available |
+| Overall Assessment | Optimal and Safe |
+
+### 3.2 Solution 2 — Terrain Visualization and Topographic Analysis
+
+**Route:** `/visualisasi`
+
+This module provides interactive terrain inspection through three visualization modes.
+
+**Mode 1 — 3D Orbital Navigation**
+
+- Displays an interactive 3D representation of the Moon.
+- Provides camera altitude and target tracking information.
+- Includes the **Fly-To Mons Mouton** feature to navigate toward the selected landing coordinates.
+- Visualizes the target location from an orbital perspective.
+
+**Mode 2 — 2D Terrain and Slope Inspection**
+
+Uses NASA LOLA DEM data to display surface elevation and terrain characteristics.
+
+Users can zoom and pan across the terrain map to inspect the proposed landing region.
+
+Key terrain indicators include:
+
+| Parameter | Calculated Value |
+|---|---:|
+| Surface Slope | 0.08° |
+| Peak Elevation | +5,920 m |
+| Solar Illumination | 100% |
+| Terrain Assessment | GO — SAFE |
+
+The calculated slope is below the 10° safety threshold referenced in the project's evaluation criteria.
+
+**Mode 3 — 3D Topography and Radio Communication Analysis**
+
+- Displays a 3D terrain representation of Mons Mouton Crest.
+- Provides selectable visualization layers:
+  - MCDA Feasibility Zones.
+  - LOLA DEM Elevation.
+  - Slope Safety.
+- Visualizes the direct communication line between the landing site and Earth.
+- Evaluates the available line-of-sight clearance above surrounding terrain.
+
+The calculated communication clearance is approximately **+12.35°** above the highest obstructing terrain boundary.
+
+### 3.3 Solution 3 — Full Mission Simulation and Landing Dynamics
+
+**Route:** `/simulasi`
+
+This module demonstrates the spacecraft's flight sequence from Earth departure to lunar touchdown.
+
+The mission is divided into three major phases:
+
+1. **Trans-Lunar Injection (TLI):** The spacecraft initiates its transfer trajectory from Earth orbit toward the Moon.
+2. **Polar Orbit Descent:** The spacecraft approaches the lunar landing region through its planned descent trajectory.
+3. **Powered Descent Initiation (PDI):** The spacecraft performs its final braking and landing maneuvers.
+
+**How to use:**
+
+1. Open the **Simulation** menu.
+2. Review the three mission phases.
+3. Click **Launch Full 3D Mission Simulator**.
+4. The simulator opens in a new browser tab through `simulator.html`.
+5. Observe the spacecraft's movement and flight instrumentation during the landing sequence.
+
+**Flight instrumentation includes:**
+
+- Vertical velocity (\(V_z\)).
+- Horizontal velocity (\(V_x\)).
+- Remaining propellant.
+- Spacecraft altitude.
+- Touchdown safety indicator.
+
+The simulator uses a WebGL-based 3D environment powered by Three.js, with a target vertical touchdown velocity of \(V_z \leq 1.0\text{ m/s}\).
 
 ---
 
-## 🛠️ 5. Pilihan Perintah Menjalankan Aplikasi (`main.py`)
+## 4. Scientific Data and Methodology
 
-Selain antarmuka web, launcher `main.py` menyediakan opsi multi-mode:
+XASUAI incorporates publicly available NASA datasets and mathematical methods to support its landing-site evaluation and mission simulation.
 
-| Perintah Terminal | Mode Aplikasi | Keterangan |
-| :--- | :--- | :--- |
-| **`python main.py`** (atau `python web/server.py`) | **Web Console (Rekomendasi Utama)** | Menjalankan server Tornado & otomatis membuka Web Dashboard di browser (`:8888`). |
-| **`python main.py --desktop`** | **Desktop GUI PyQt6** | Menjalankan antarmuka desktop native 5-tab. |
-| **`python main.py --sim`** | **Flight Simulator 3D** | Langsung meluncurkan WebGL 3D Flight Simulator di peramban browser. |
-| **`python main.py --eval`** | **CLI Batch Evaluator** | Menjalankan kalkulasi cepat MCDA langsung di terminal teks. |
-| **`python main.py --help`** | **Menu Bantuan** | Menampilkan daftar seluruh parameter dan argumen yang tersedia. |
+### 4.1 Scientific Data Sources
+
+| Dataset / Resource | Application |
+|---|---|
+| NASA LRO LOLA DEM | Surface elevation, terrain mapping, and slope analysis |
+| NASA JPL Horizons DE441 | Sun and Earth position calculations and mission timing |
+| NASA Moon Trek | Geographic inspection and coordinate verification |
+| NASA Artemis Landing Regions Study | Background reference for lunar landing-site selection |
+| NASA NAIF SPICE Toolkit | Reference for astronomical coordinate systems and transformations |
+
+### 4.2 Mathematical Approaches
+
+**Multi-Criteria Decision Analysis (MCDA)**
+
+Used to evaluate and compare potential landing locations based on multiple environmental and operational criteria.
+
+**Terrain Gradient Analysis**
+
+Uses elevation differences from LOLA DEM data to calculate terrain slopes and assess landing surface conditions.
+
+**Horizon Raymarching**
+
+Analyzes the surrounding terrain horizon to evaluate potential obstructions to direct communication with Earth.
+
+**Orbital Mechanics**
+
+Applies two-body orbital mechanics to estimate translunar injection requirements.
+
+**Runge-Kutta Numerical Integration (RK45)**
+
+Used for numerical trajectory calculations during spacecraft descent and powered landing maneuvers.
+
+### 4.3 Scientific Evaluation Results
+
+| Evaluation Parameter | Method / Data Source | Calculated Result |
+|---|---|---:|
+| Terrain Elevation | NASA LRO LOLA DEM | +5,920 m |
+| Surface Slope | DEM Gradient Analysis | 0.08° |
+| Solar and Earth Position | NASA JPL Horizons DE441 | 336-hour analysis |
+| Communication Clearance | 360° Horizon Raymarching | +12.35° |
+| Translunar Injection | Two-Body Orbital Mechanics | +3.05 km/s |
+| Vertical Touchdown Velocity | RK45 Numerical Integration | 0.80 m/s |
+
+These calculations form the basis of XASUAI's environmental assessment and mission simulation.
 
 ---
 
-## 📁 6. Struktur Direktori Proyek
+## 5. Technology Stack
+
+XASUAI combines Python-based scientific computation with web technologies for interactive visualization.
+
+| Category | Technologies |
+|---|---|
+| Programming Language | Python, JavaScript |
+| Backend | Tornado |
+| Frontend | HTML, CSS, JavaScript |
+| 3D Visualization | Three.js, WebGL |
+| Desktop Interface | PyQt6 |
+| Scientific Computation | NumPy, SciPy |
+| Astronomical Data | NASA JPL Horizons |
+| Terrain Data | NASA LRO LOLA DEM |
+| Numerical Methods | MCDA, RK45, Orbital Mechanics |
+| Development Tools | Git, GitHub |
+
+---
+
+## 6. Project Structure
 
 ```text
 Xasuai/
-├── web/                               # Antarmuka Web Executive & Simulator 3D
-│   ├── index.html                     # Dashboard Web Executive (Bento Grid)
-│   ├── simulator.html                 # Simulator Pendaratan Misi 3D (WebGL / Three.js)
-│   ├── server.py                      # Backend REST API Server (Tornado Engine)
-│   ├── js/app.js                      # Engine Logika, Three.js 3D, & Sistem Bilingual i18n
-│   ├── css/style.css                  # Tata Letak Modern NASA / Linear Clean Design
-│   └── data/                          # Data Mesh 3D Topografi Mons Mouton & Tekstur
-├── src/                               # Modul Layanan Backend
-│   ├── site_evaluator.py              # Evaluasi Spasiotemporal & Scoring MCDA
-│   ├── trajectory_calculator.py       # Propagator Trajektori PDI & Solver RK45
-│   └── visualizer_ui.py               # Generator Polar Sky-Plot & Visualizer
-├── data/                              # Dataset Ilmiah NASA
-│   ├── quickmap-lroc.png / .vrt       # Citra Satelit Elevasi NASA LRO LOLA DEM
-│   ├── horizons_cache.json            # Cache Efemeris NASA JPL Horizons DE441
-│   ├── moon_1024.jpg                  # Tekstur Fotorealistik Permukaan Bulan
-│   └── earth_blue_marble.jpg          # Tekstur Bumi Resolusi Tinggi
-├── tests/                             # Pengujian Otomatis (Automated Unit Tests)
-│   ├── test_xsasuai_core.py           # Pengujian Unit Modul Inti (MCDA, RK45, Skyplot)
-│   └── test_web_server.py             # Pengujian Integrasi REST API
-├── utilities/ & scripts/              # Data Pipeline & Preprocessing
-│   ├── generate_jpl_horizons_ephemeris.py # Pipeline Pengunduh Efemeris NASA JPL
-│   ├── parse_horizons_to_trajectory_js.py # Konverter Trajektori ke Format WebGL
-│   └── export_terrain_to_web.py       # Eksportir Data LOLA DEM ke Web 3D
-├── solar_earth_horizon_planner.py     # [Solusi 1] Solver Sudut Surya & Raymarching Cakrawala
-├── scan_terrain.py                    # [Solusi 2] Solver Analisis Kelerengan & Optimasi MCDA
-├── simulate_landing.py                # [Solusi 3] Solver Dinamika Pendaratan 6-DOF & Gravitasi J2
-├── horizons_api.py                    # Klien Resmi REST API NASA JPL Horizons
-├── mission_state.py                   # Shared State Bus Antar-Modul
-├── constants.py                       # Konstanta Fisika, Astronomi, & Koordinat Acuan
-├── main.py                            # Launcher Terpadu (Default: Web Console)
-├── requirements.txt                   # Daftar Pustaka Dependensi Python Ringkas
-└── README.md                          # Dokumentasi Resmi Proyek
+├── web/
+│   ├── index.html
+│   ├── simulator.html
+│   ├── server.py
+│   ├── js/
+│   │   └── app.js
+│   ├── css/
+│   │   └── style.css
+│   └── data/
+├── src/
+│   ├── site_evaluator.py
+│   ├── trajectory_calculator.py
+│   └── visualizer_ui.py
+├── data/
+│   ├── quickmap-lroc.png
+│   ├── quickmap-lroc.vrt
+│   ├── horizons_cache.json
+│   ├── moon_1024.jpg
+│   └── earth_blue_marble.jpg
+├── tests/
+│   ├── test_xsasuai_core.py
+│   └── test_web_server.py
+├── utilities/
+├── scripts/
+├── solar_earth_horizon_planner.py
+├── scan_terrain.py
+├── simulate_landing.py
+├── horizons_api.py
+├── mission_state.py
+├── constants.py
+├── main.py
+├── requirements.txt
+└── README.md
 ```
 
 ---
 
-## 🌐 7. Sumber Data Resmi & Referensi Ilmiah (Data Sources & Links)
+## 7. Additional Application Modes
 
-Proyek XASUAI dibangun menggunakan data terbuka (*Open Data*) resmi dari NASA dan badan antariksa internasional:
+In addition to the web application, XASUAI provides several execution modes through `main.py`.
 
-1. **NASA LRO LOLA DEM (Lunar Reconnaissance Orbiter / Lunar Orbiter Laser Altimeter)**  
-   - **Deskripsi:** Model Elevasi Digital (DEM) satelit beresolusi tinggi (20 m/pixel) untuk memetakan topografi mikro, kontur kelerengan (*slope safety*), dan elevasi tebing kawah di Mons Mouton.  
-   - **Tautan Data:** [NASA LROC QuickMap](https://quickmap.lroc.asu.edu/) • [NASA PDS Geosciences Node (LOLA RDR)](https://pds-geosciences.wustl.edu/missions/lro/lola.htm)
-
-2. **NASA JPL Horizons Ephemeris System (DE441 / DE440)**  
-   - **Deskripsi:** Sistem efemeris presisi tinggi dari NASA Jet Propulsion Laboratory untuk melacak vektor posisi Matahari (Target: `10`) dan Bumi (Target: `399`) terhadap titik koordinat pendarat di Bulan selama rentang misi 336 jam (14 hari lunar).  
-   - **Tautan API:** [NASA JPL Horizons System](https://ssd.jpl.nasa.gov/horizons/) • [NASA JPL Horizons REST API Documentation](https://ssd-api.jpl.nasa.gov/doc/horizons.html)
-
-3. **NASA Moon Trek (Solar System Treks)**  
-   - **Deskripsi:** Portal eksplorasi kartografi interaktif permukaan Bulan untuk verifikasi silang koordinat geospasial Mons Mouton Crest ($-84,9^\circ\text{S}, 33,3^\circ\text{W}$).  
-   - **Tautan Aplikasi:** [NASA Moon Trek Explorer](https://trek.nasa.gov/moon/)
-
-4. **NASA Artemis III Candidate Landing Regions Study**  
-   - **Deskripsi:** Publikasi ilmiah resmi NASA yang menetapkan dataran tinggi Mons Mouton sebagai salah satu dari zona kandidat pendaratan berawak Artemis karena keunggulan elevasi dan akses pencahayaannya.  
-   - **Tautan Publikasi:** [NASA Artemis Landing Regions Announcement](https://www.nasa.gov/news-release/nasa-provides-update-on-artemis-iii-moon-landing-regions/)
-
-5. **NASA NAIF SPICE Toolkit**  
-   - **Deskripsi:** Standar pustaka astrodinamika untuk transformasi koordinat inersial (J2000) ke kerangka referensi tetap Bulan (MOON_ME / IAU Moon Frame).  
-   - **Tautan Toolkit:** [NAIF NASA SPICE Information System](https://naif.jpl.nasa.gov/naif/toolkit.html)
+| Command | Application Mode | Description |
+|---|---|---|
+| `python main.py` | Web Console | Launches the web dashboard and Tornado server |
+| `python main.py --desktop` | Desktop GUI | Opens the native PyQt6 interface |
+| `python main.py --sim` | 3D Flight Simulator | Launches the WebGL landing simulator |
+| `python main.py --eval` | CLI Batch Evaluator | Executes MCDA calculations through the terminal |
+| `python main.py --help` | Help | Displays available commands and arguments |
 
 ---
 
-## 🤖 8. Pernyataan Transparansi Penggunaan AI (AI Disclosure Statement)
+## 8. NASA Data Sources and References
 
-Sesuai dengan ketentuan etika dan transparansi kompetisi **NASA Space Apps Challenge**:
+The project utilizes publicly accessible scientific resources to support its environmental analysis and lunar mission planning.
 
-> ### 📌 Pernyataan Tim (Team Statement):
-> **Alat bantu kecerdasan buatan (AI) digunakan semata-mata sebagai akselerator teknis coding (*development accelerator*) untuk mempercepat penulisan sintaksis pemrograman, perapian modul (*code refactoring*), serta penyusunan sistem kamus dwibahasa (ID ⟷ EN).**
->
-> **AI TIDAK DIGUNAKAN UNTUK MEMBUAT IDE ATAU MERANCANG SOLUSI PROYEK.**
->
-> Seluruh ide konseptual, penetapan lokasi Mons Mouton di Kutub Selatan Bulan, perumusan 3 masalah kritis (suhu/cahaya, tebing komunikasi, dan dinamika pendaratan), formulasi 3 solusi terintegrasi, metodologi matematika *Multi-Criteria Decision Analysis (MCDA)*, *Raymarching Horizon 360°*, serta penerapan solver numerik *Runge-Kutta RK45* **murni digagas, dirumuskan, dan dirancang secara orisinal oleh tim pengembang (Pilar Karya)**.
+1. **NASA LRO LOLA DEM**
+   - Lunar elevation and topographic data.
+   - [NASA LROC QuickMap](https://quickmap.lroc.asu.edu/)
+   - [NASA PDS Geosciences Node](https://pds-geosciences.wustl.edu/missions/lro/lola.htm)
+
+2. **NASA JPL Horizons System**
+   - Astronomical ephemeris data for Sun and Earth position calculations.
+   - [JPL Horizons](https://ssd.jpl.nasa.gov/horizons/)
+   - [Horizons API Documentation](https://ssd-api.jpl.nasa.gov/doc/horizons.html)
+
+3. **NASA Moon Trek**
+   - Interactive lunar geographic exploration and coordinate inspection.
+   - [NASA Moon Trek](https://trek.nasa.gov/moon/)
+
+4. **NASA Artemis Landing Regions Study**
+   - Reference for candidate lunar landing regions, including Mons Mouton.
+   - [NASA Artemis III Landing Regions Announcement](https://www.nasa.gov/news-release/nasa-provides-update-on-artemis-iii-moon-landing-regions/)
+
+5. **NASA NAIF SPICE Toolkit**
+   - Reference for astronomical coordinate systems and space navigation calculations.
+   - [NASA NAIF Toolkit](https://naif.jpl.nasa.gov/naif/toolkit.html)
 
 ---
 
-## 👥 9. Tim Pengembang & Atribusi
+## 9. AI Usage Disclosure
 
-- **Tim:** Pilar Karya
-- **Ajang:** NASA Space Apps Challenge 2026
-- **Tantangan:** *Lunar Landing Site Navigator*
-- **Lokasi Acara:** Purwokerto
-- **Lisensi:** MIT Open Source License — Bebas digunakan untuk pengembangan riset dan eksplorasi antariksa.
+XASUAI was developed through the team's original conceptual work, research, and technical implementation.
+
+Artificial intelligence tools were used as development support in selected activities, including:
+
+- Assisting with programming syntax and code development.
+- Supporting code refactoring and module organization.
+- Assisting in the preparation of the bilingual language system.
+- Generating and stylizing selected visual assets and logo elements using Gemini and Canva.
+
+The project's core concept, problem identification, selection of Mons Mouton Crest as the target landing region, mathematical approaches, and integration of the three proposed solutions were developed by the PILAR KARYA team.
+
+AI-generated visual assets are identified as such, and the team acknowledges the use of AI tools in the development process.
+
+---
+
+## 10. Project Impact and Future Potential
+
+XASUAI aims to make lunar landing-site evaluation and mission planning more accessible through an integrated and interactive platform.
+
+Its potential contributions include:
+
+- **Safer Landing Assessment:** Supporting the identification of suitable landing regions through terrain and environmental evaluation.
+- **Mission Scheduling:** Helping evaluate launch and landing opportunities based on solar illumination and communication conditions.
+- **Scientific Visualization:** Making complex astronomical and topographic information easier to understand through interactive 2D and 3D representations.
+- **Mission Simulation:** Demonstrating the relationship between spacecraft trajectory, velocity, and landing conditions.
+- **Educational Value:** Providing an interactive learning platform for understanding lunar exploration and astrodynamics.
+
+Future development could incorporate additional landing-site datasets, more comprehensive environmental constraints, and improved spacecraft dynamics models.
+
+---
+
+## 11. Team and Attribution
+
+**Team Name:** PILAR KARYA  
+**Competition:** NASA Space Apps Challenge 2026  
+**Selected Challenge:** Lunar Landing Site Navigator  
+**Local Event:** Purwokerto, Indonesia
+
+**Team Members:**
+
+1. Syaifa Mulyadi, S.T., M.T.
+2. Muhammad Alif Abdam
+3. Mutiara Ersa Christine Dawolo
+4. Fuadi Dhiyaulhaq
+5. Arsyad Mulya Rahman
+6. Muhammad Nabil Surya Andyka
+
+**Visual Assets:** Selected logos and visual elements were AI-generated and stylized using Gemini and Canva.
+
+**License:** MIT License
+
+---
+
+*Explore. Create. Solve.*
+
+**PILAR KARYA | NASA Space Apps Challenge 2026**
