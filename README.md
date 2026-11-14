@@ -201,8 +201,8 @@ Proyek XASUAI dibangun menggunakan data terbuka (*Open Data*) resmi dari NASA da
    - **Tautan Aplikasi:** [NASA Moon Trek Explorer](https://trek.nasa.gov/moon/)
 
 4. **NASA Artemis III Candidate Landing Regions Study**  
-   - **Deskripsi:** Publikasi ilmiah resmi NASA yang menetapkan dataran tinggi Mons Mouton sebagai salah satu dari 13 zona kandidat pendaratan berawak Artemis karena keunggulan elevasi dan akses pencahayaannya.  
-   - **Tautan Publikasi:** [NASA Artemis Landing Regions Announcement](https://www.nasa.gov/news-release/nasa-identifies-candidate-regions-for-additional-artemis-lunar-landings/)
+   - **Deskripsi:** Publikasi ilmiah resmi NASA yang menetapkan dataran tinggi Mons Mouton sebagai salah satu dari zona kandidat pendaratan berawak Artemis karena keunggulan elevasi dan akses pencahayaannya.  
+   - **Tautan Publikasi:** [NASA Artemis Landing Regions Announcement](https://www.nasa.gov/news-release/nasa-provides-update-on-artemis-iii-moon-landing-regions/)
 
 5. **NASA NAIF SPICE Toolkit**  
    - **Deskripsi:** Standar pustaka astrodinamika untuk transformasi koordinat inersial (J2000) ke kerangka referensi tetap Bulan (MOON_ME / IAU Moon Frame).  
